@@ -37,7 +37,7 @@ public final class AsyncLayoutInflater {
         public boolean handleMessage(Message msg) {
             InflateRequest request = (InflateRequest) msg.obj;
             if (request.view == null) {
-				//解析布局，xml就靠它构建成一个view的。
+                //解析布局，xml就靠它构建成一个view的。
                 request.view = mInflater.inflate(
                         request.resid, request.parent, false);
             }
@@ -166,7 +166,7 @@ public final class AsyncLayoutInflater {
         }
 
         public void releaseRequest(InflateRequest obj) {
-			//做一下清洁
+            //做一下清洁
             obj.callback = null;
             obj.inflater = null;
             obj.parent = null;
