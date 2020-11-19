@@ -1,4 +1,4 @@
-``java
+```java
 public final class AsyncLayoutInflater {
     private static final String TAG = "AsyncLayoutInflater";
 
