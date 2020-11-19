@@ -25,13 +25,13 @@ public final class AsyncLayoutInflater {
         request.resid = resid;
         request.parent = parent;
         request.callback = callback;
-		//执行请求
+        //执行请求
         mInflateThread.enqueue(request);
     }
 
     /**
-	回调监听。
-	*/
+    * 回调监听。
+    * */
     private Callback mHandlerCallback = new Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -87,9 +87,9 @@ public final class AsyncLayoutInflater {
         protected View onCreateView(String name, AttributeSet attrs) throws ClassNotFoundException {
             for (String prefix : sClassPrefixList) {
                 try {
-					//里面搜索.?有点疑惑？
-					//优先去"android.widget.",android.webkit.",android.app.
-					//因为大部分布局都在这里面 比如 button edittext textview？？
+                    //里面搜索.?有点疑惑？
+                    // 优先去"android.widget.",android.webkit.",android.app.
+                    // 因为大部分布局都在这里面 比如 button edittext textview？？
                     View view = createView(name, prefix, attrs);
                     if (view != null) {
                         return view;
@@ -125,7 +125,7 @@ public final class AsyncLayoutInflater {
         public void runInner() {
             InflateRequest request;
             try {
-				//取出一个请求，这里ArrayBlockingQueue是一个阻塞式的队列.
+                //取出一个请求，这里ArrayBlockingQueue是一个阻塞式的队列.
                 request = mQueue.take();
             } catch (InterruptedException ex) {
                 // Odd, just continue
@@ -134,7 +134,7 @@ public final class AsyncLayoutInflater {
             }
 
             try {
-				//解析布局，返回一个view.xml就靠它构建成一个view的。
+                //解析布局，返回一个view.xml就靠它构建成一个view的。
                 request.view = request.inflater.mInflater.inflate(
                         request.resid, request.parent, false);
             } catch (RuntimeException ex) {
@@ -142,23 +142,23 @@ public final class AsyncLayoutInflater {
                 Log.w(TAG, "Failed to inflate resource in the background! Retrying on the UI"
                         + " thread", ex);
             }
-			//布局解析完成，发送一个消息。
+            //布局解析完成，发送一个消息。
             Message.obtain(request.inflater.mHandler, 0, request)
                     .sendToTarget();
         }
 
         @Override
         public void run() {
-			//循环执行 上面的，runInner()
+            //循环执行 上面的，runInner()
             while (true) {
                 runInner();
             }
         }
 
         public InflateRequest obtainRequest() {
-			//从对象缓存池取出一个对象
+            //从对象缓存池取出一个对象
             InflateRequest obj = mRequestPool.acquire();
-			//如果为空，新建一个。 为空情况是1，是没有对象数组里面。2，缓存池子对象，被其他线程占用了。
+            //如果为空，新建一个。 为空情况是1，是没有对象数组里面。2，缓存池子对象，被其他线程占用了。
             if (obj == null) {
                 obj = new InflateRequest();
             }
@@ -172,7 +172,7 @@ public final class AsyncLayoutInflater {
             obj.parent = null;
             obj.resid = 0;
             obj.view = null;
-			//把对象缓存起来。提示：如果对象存在数组里面抛出异常。防止重复缓存对象。
+            //把对象缓存起来。提示：如果对象存在数组里面抛出异常。防止重复缓存对象。
             mRequestPool.release(obj);
         }
 
