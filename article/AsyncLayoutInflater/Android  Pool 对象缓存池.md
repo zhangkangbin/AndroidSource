@@ -1,7 +1,9 @@
 ```java
 public static class SimplePool<T> implements Pool<T> {
+        //线程池对象数组
         private final Object[] mPool;
 
+        //线程池目前可用对象size，意思是还存在多少个对象在数组中。
         private int mPoolSize;
 
         /**
