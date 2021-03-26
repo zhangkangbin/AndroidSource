@@ -2,6 +2,10 @@ package com.zkb.androidsource.livedata
 
 import android.util.Log
 import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlin.concurrent.thread
 
 class DataVM : ViewModel () {
 
@@ -79,20 +83,24 @@ class DataVM : ViewModel () {
 
     fun postData() {
 
-        Thread() {
-            run {
-                val value = DataBean("XiaoBao_post", 18)
-                //子线程
-                getData().postValue(value)
-
-            }
-        }.start();
-
-
+        GlobalScope.launch (Dispatchers.IO){
+            val value = DataBean("GlobalScope XiaoBao_post", 18)
+            //子线程
+            getData().postValue(value)
+        }
     }
 
+    fun getThread(){
+
+
+        val t= thread {
+
+        }
+    }
     override fun onCleared() {
         super.onCleared()
+        
+
     }
 }
 

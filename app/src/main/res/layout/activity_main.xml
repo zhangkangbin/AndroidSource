@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
@@ -12,22 +13,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <com.zkb.androidsource.MyTextView
+     />
+    <com.zkb.androidsource.event.MyTextView
         android:id="@+id/test1"
         android:layout_marginTop="60dp"
         android:padding="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello2 World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+     />
+    <Button
+        android:text="touch event"
+        android:id="@+id/touchEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
+    <Button
+        android:text="协程使用"
+        android:id="@+id/btnCoroutine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

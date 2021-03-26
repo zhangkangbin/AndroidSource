@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
-import com.zkb.androidsource.layout.AsyncLayoutInflater
-import com.zkb.androidsource.layout.AsyncLayoutInflaterActivity
+import com.zkb.androidsource.coroutine.CoroutineActivity
+import com.zkb.androidsource.event.TouchEventActivity
 import com.zkb.androidsource.livedata.LiveDataActivity
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +17,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LiveDataActivity::class.java))
 
         }
+        findViewById<View>(R.id.touchEvent).setOnClickListener {
+            startActivity(Intent(this, TouchEventActivity::class.java))
+        }
+
+        findViewById<View>(R.id.btnCoroutine).setOnClickListener {
+            startActivity(Intent(this, CoroutineActivity::class.java))
+        }
+
 
     /*    var test=findViewById<ViewPager>(R.id.NO_DEBUG)
         var ViewPager2=findViewById<ViewPager2>(R.id.NO_DEBUG)
