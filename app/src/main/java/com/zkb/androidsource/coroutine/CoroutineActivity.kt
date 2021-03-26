@@ -6,11 +6,9 @@ import android.os.Environment
 import android.util.Log
 import android.view.View
 import com.zkb.androidsource.R
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.io.File
+import java.lang.Exception
 
 /**
   *
@@ -31,10 +29,17 @@ class CoroutineActivity : AppCompatActivity() {
             //val isOk= test()
             testUNDISPATCHED()
         }
-
+        //主线程运行,调度器的目的就是切线程
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                //userNameView.text = getUserCoroutine().name
+            }catch (e:Exception){
+                //userNameView.text = getUserCoroutine().name
+            }
+        }
     }
 
-    @ExperimentalCoroutinesApi
+
     private fun test(){
 
         //启动一个子线程，没有start,确实这个更符合操作系统的想法。
@@ -46,7 +51,7 @@ class CoroutineActivity : AppCompatActivity() {
         startType()
     }
 
-    @ExperimentalCoroutinesApi
+
     private fun  startType(){
         /**
          * DEFAULT	立即执行协程体
@@ -90,6 +95,9 @@ class CoroutineActivity : AppCompatActivity() {
         }
     }
 
+    private suspend  fun get(){
+
+    }
 
     private  fun testUNDISPATCHED(){
 
@@ -109,6 +117,7 @@ class CoroutineActivity : AppCompatActivity() {
             //delay(100)
             log(4)
         }
+
 
        // job.join()
         log(5)
